@@ -1,6 +1,6 @@
 # Instaclone Challenge - Nomad Coffee backend
 
-## setup 
+## 01 setup 
 
 ### install
 - npm install apollo-server@2.21.0
@@ -80,3 +80,20 @@ model Sample {
 	createdAt DateTime @default(now()) 
 	updatedAt DateTime @updatedAt
 }
+
+
+
+## 02 Create Account
+### schema.prisma
+1) 필수로 들어가는 항목 구분해서 model 생성
+### createAccount.typeDefs.js
+1) model에 맞게 typeDefs 설정
+2) 공통 mutation response 정보를 가진 shared/shared.typeDefs.js 생성
+### createAccount.resolvers.js
+1) hash password 생성
+	- bcrypt 사용(npm install bcrypt)
+	- 전달받은 password를 bcrypt.hash를 사용해서 변환
+2) username, email 중복 확인
+3) email 형식 준수 여부 확인
+4) password 형식 준수 여부 확인
+5) data 생성
