@@ -11,5 +11,11 @@ export default gql`
 		githubUsername : String
 		createdAt : String!
 		updatedAt : String!
+		followers : [User]
+		following : [User]
+		totalFollowing : Int!
+		totalFollowers : Int!
+		isFollowing : Boolean!
+		isMe : Boolean!
     }
 `

@@ -132,3 +132,24 @@ model Sample {
 ### see profile
 1) 누구든지 조회 가능하도록 query로 제공
 2) User를 리턴해주기 위해 User를 정의한 typeDefs 생성
+
+
+
+## 04 Follow/Unfollow, seeUser with seeFollowing, seeFollowers, searchUsers
+### Follow
+1) connect를 사용해서 두 사용자간 연결
+	- connect는 unique한 필드에만 사용 가능함
+### UnFollow
+1) unconnect를 사용해서 두 사용자간 연결 해제
+### seeUser with seeFollowing, seeFollowers
+1) seeUser 안에 following, followers 둘다 확인할 수 있도록 정의
+2) pagination 사용
+	- page int를 필수로 주고 받아야함
+	- take와 skip을 활용
+3) 전체 팔로워, 팔로잉 수 리턴
+	- Math.ceil를 사용해서 올림한 값 리턴
+### searchUsers
+1) pagination 사용
+	- page, take, skip 사용
+2) 대소문자 구분 없이 검색하기 위해 lowercase를 사용
+3) 해당 문자 포함을 체크하기 위해 contains 사용
