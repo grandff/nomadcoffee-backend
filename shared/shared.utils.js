@@ -1,3 +1,12 @@
+import AWS from 'aws-sdk';
+
+AWS.config.update({
+  credentials: {
+    accessKeyId: process.env.AWS_KEY,
+    secretAccessKey: process.env.AWS_SECRET_KEY,
+  },
+});
+
 // 로그인 여부 확인
 export const protectResolver = (outResolver) => (root, args, context, info) => {
 	// args -> param 들어있음
@@ -19,3 +28,23 @@ export const protectResolver = (outResolver) => (root, args, context, info) => {
 	
 	return outResolver(root,args,context,info);
 }
+
+// aws s3 연동
+// 파일이 어디에 저장됐는지 알려주는 url을 리턴해줌
+export const uploadToS3 = async (file, userId, folderName) => {
+  const { filename, createReadStream } = await file;
+  const readStream = createReadStream();
+  const objectName = `${folderName}/${userId}-${Date.now()}-${filename}`;
+  // 파일 저장 url return
+  const { Location } = await new AWS.S3()
+    .upload({
+      Bucket: 'nomad-coffee-kjm',
+      Key: objectName,
+      ACL: 'public-read', // private 모드 설정
+      Body: readStream,
+    })
+    .promise();
+
+  // url 리턴 전에 파일이 정상인지 올릴수 있는지 확인이 필요함
+  return Location;
+};

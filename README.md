@@ -153,3 +153,39 @@ model Sample {
 	- page, take, skip 사용
 2) 대소문자 구분 없이 검색하기 위해 lowercase를 사용
 3) 해당 문자 포함을 체크하기 위해 contains 사용
+
+
+
+## 05 createCoffeeShop, seeCoffeeShops, seeCoffeeShop, seeCategory, seeCategories, editCoffeeShop
+### createCoffeeShop
+1) 기존에 photo 하나만 올리던걸 coffee shop으로 묶어서 하는거 같은데욤?
+2) 이전에 hashtags가 category로 들어간거임
+3) 가장 먼저 model 생성 후 shops.typeDefs.js 정의
+4) caption 컬럼에 shop에 대한 설명 적기
+	- hashtag 추출하는것처럼 # 뒤에 있는 데이터를 category로 저장하기
+5) file url 가져오기
+	- static 쓰지말고 바로 aws 연동시키기(npm install aws-sdk)
+6) categories와 photos 같이 업로드
+	- relation 으로 서로 연결
+	- categories 는 connectOrCreate로 해시태그가 있을때만 등록
+	- connectOrCreate는 unique 필드여야함
+	- photos는 create로 연결해서 등록
+### seeCoffeeShops
+1) 전체 coffeeshop list 제공
+	- pagination 활용
+2) include 사용..?
+	- 이거 front 에서 include 사용하는거 아니였나.. 일단 데이터 조회를 위해 include user photo category 해놨음
+### seeCoffeeShop
+1) id 값으로 해당 coffeeshop 정보 확인
+### seeCategory
+1) 해당 카테고리에 해당하는 coffeeshop list return
+	- pagination 활용
+### seeCategories
+1) 전체 카테고리를 보여줌
+	- pagination 활용
+2) 각 카테고리별 포함하고 있는 상점 갯수도 같이 리턴
+	- cateogry resolvers 생성해서 count 추가 
+### editCoffeeShop
+1) coffee shop 정보 수정
+	- name을 제외한 나머지 값 수정
+	- categoires 의 connect를 제거하고 새로 연결하는 작업이 필요함
