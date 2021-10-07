@@ -189,3 +189,31 @@ model Sample {
 1) coffee shop 정보 수정
 	- name을 제외한 나머지 값 수정
 	- categoires 의 connect를 제거하고 새로 연결하는 작업이 필요함
+	
+	
+## 06 heroku
+### Build Server
+1) 실제 서버엔 nodemon이 필요 없고 babel-node를 쓰면 용량도 크고 메모리를 많이 차지해서 babel cli를 사용해야함
+	- npm install @babel/cli --dev-only
+2) src 폴더를 만들어서 모든 파일을 해당 폴더에 넣기
+	- package의 dev 명령어에 server 경로를 src/server로 변경
+3) build, start 명령어 추가
+	- "build": "babel src --out-dir build"
+	- "start": "node build/server"
+	- npm run build로 build 후에 start 명령어로 실행되는지 확인 필요
+	- .gitignore에 build 폴더 추가
+4) start 명령어 시 필요한 regenerator-runtime 설치
+	- npm install --save-dev @babel/plugin-transform-runtime
+	- babel.config.json에 "plugins" : ["@babel/plugin-transform-runtime"] 추가하기
+### Deploy Heroku
+1) deploy는 github 방식으로 추가하기
+	- create new app 후 github 클릭 해서 repo하고 연결
+2) .env 파일에 추가한 변수들을 heroku에 추가하기
+	- settings의 Config vars로 이동해서 입력
+	- db url, port는 입력할 필요 없음
+3) prisma 사용을 위한 addon 추가
+	- heroku postgres addons 설치
+4) prisma migrate 사용을 위해 Procfile 추가
+	- release: npx prisma migrate deploy
+	- web: npm start
+	- 위 두줄 추가하기

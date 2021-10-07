@@ -4,3 +4,7 @@ node_modules
 
 # 로그인 토큰 정보
 toekninfo.txt
+
+
+# build파일
+build
