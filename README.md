@@ -206,3 +206,7 @@ model Sample {
 	- release: npx prisma migrate deploy
 	- web: npm start
 	- 위 두줄 추가하기
+### 추가 작업
+1) 파일 업로드를 위해 cors 적용
+2) apollo express server로 교체
+	- 현재 apollo server를 2. 버전대로 해놨기때문에 똑같이 2. 버전대로 해놨음

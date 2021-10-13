@@ -1,11 +1,14 @@
 require("dotenv").config();
-import {ApolloServer} from "apollo-server";
 import { typeDefs, resolvers } from './schema';
 import {getUser} from "./users/users.utils";
 import {protectResolver} from "./shared/shared.utils.js";
+import http from 'http';
+import { ApolloServer } from 'apollo-server-express';
+import express from 'express';
 
+const cors = require("cors");
 
-const server = new ApolloServer({ 	
+const apollo = new ApolloServer({ 	
 	typeDefs,
 	resolvers,
 	playground : true,		// production 모드에서도 /graphql 을 실행할 수 있도록 처리(확인 용도로만 사용하고 주석 처리하기)
@@ -17,6 +20,18 @@ const server = new ApolloServer({
 		}
 	}
 });
+
 const PORT = process.env.PORT;
 
-server.listen(PORT).then(() => console.log(`Server is running on http://localhost:${PORT}/`));
+// set express server
+const app = express();
+app.use(cors());
+apollo.applyMiddleware({ app }); // logger 다음줄에 applyMiddleware에 써야함
+
+// create http server
+const httpServer = http.createServer(app);
+apollo.installSubscriptionHandlers(httpServer); // ws 소켓 처리
+
+httpServer.listen(PORT, () => {
+  console.log(`Server is running on https://localhost:${PORT}/`);
+});
