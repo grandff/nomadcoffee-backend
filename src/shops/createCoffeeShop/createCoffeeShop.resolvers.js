@@ -10,13 +10,13 @@ export default {
 			let categoriesObjs = [];
 			if(caption){
 				categoriesObjs = processCategories(caption);
-			}
+			}			
 
 			// file Url 가져옴
 			const fileUrl = await uploadToS3(file, loggedInUser.id, 'uploads');
 
 			// shop 데이터 저장, photo 저장, category는 있으면 저장
-			const coffeeShop =  await client.coffeeShop.create({
+			return client.coffeeShop.create({
 				data : {
 					name,
 					caption,

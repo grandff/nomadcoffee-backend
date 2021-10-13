@@ -1,7 +1,6 @@
 # Instaclone Challenge - Nomad Coffee backend
 
 ## 01 setup 
-
 ### install
 - npm install apollo-server@2.21.0
 - npm install graphql
@@ -15,12 +14,10 @@
 - npm install @prisma/client (설치 후 client.js 생성해서 선언)
 - npm install graphql-tools@7.0.4
 - npm install dotenv
-
 ### postgresql db create
 - sudo -i -u postgres
 - psql
 - CREATE DATABASE DATABASE_NAME;
-
 ### touch
 - touch README.md
 - touch .gitignore
@@ -31,7 +28,6 @@
 	}
 - touch schema.js
 - touch client.js
-
 ### package json
 	{
 	...
@@ -42,7 +38,6 @@
 		},
 	...
 	}
-
 ### sever.js
 require("dotenv").config();
 import {ApolloServer} from "apollo-server";
@@ -55,22 +50,17 @@ const server = new ApolloServer({
 const PORT = process.env.PORT;
 
 server.listen(PORT).then(() => console.log(`Server is running on http://localhost:${PORT}/`));
-
 ### schema.js
 import { loadFilesSync, mergeResolvers, mergeTypeDefs, makeExecutableSchema } from "graphql-tools";
-
 const loadedTypes = loadFilesSync(`${__dirname}/**/*.typeDefs.js`);
 const loadedResolvers = loadFilesSync(`${__dirname}/**/*.resolvers.js`);       // glob
 // ** -> 모든 폴더, * -> 모든 파일
-
 export const typeDefs = mergeTypeDefs(loadedTypes);
 export const resolvers = mergeResolvers(loadedResolvers);
-
 ### client.js
 import { PrismaClient } from "@prisma/client";
 const client = new PrismaClient();
 export default client;
-
 ### prisma sample
 model Sample { 
 	id Int @id @default(autoincrement()) 
@@ -80,7 +70,6 @@ model Sample {
 	createdAt DateTime @default(now()) 
 	updatedAt DateTime @updatedAt
 }
-
 
 
 ## 02 Create Account
