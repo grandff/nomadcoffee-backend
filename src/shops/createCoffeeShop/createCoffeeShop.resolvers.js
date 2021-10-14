@@ -14,6 +14,7 @@ export default {
 
 			// file Url 가져옴
 			const fileUrl = await uploadToS3(file, loggedInUser.id, 'uploads');
+			console.log(fileUrl);
 
 			// shop 데이터 저장, photo 저장, category는 있으면 저장
 			return client.coffeeShop.create({

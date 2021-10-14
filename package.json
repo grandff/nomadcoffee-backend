@@ -24,7 +24,8 @@
     "express": "^4.17.1",
     "graphql": "^15.6.0",
     "graphql-tools": "^7.0.4",
-    "jsonwebtoken": "^8.5.1"
+    "jsonwebtoken": "^8.5.1",
+    "morgan": "^1.10.0"
   },
   "devDependencies": {
     "@babel/core": "^7.15.5",
