@@ -27,7 +27,7 @@ const PORT = process.env.PORT;
 // set express server
 const app = express();
 app.use(cors());
-app.use(logger('tiny')); // set logger. 'combined','tiny','dev','common'
+app.use(logger('combined')); // set logger. 'combined','tiny','dev','common'
 apollo.applyMiddleware({ app }); // logger 다음줄에 applyMiddleware에 써야함
 
 // create http server

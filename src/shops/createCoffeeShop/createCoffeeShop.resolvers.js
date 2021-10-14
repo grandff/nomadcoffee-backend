@@ -13,6 +13,7 @@ export default {
 			}			
 
 			// file Url 가져옴
+			console.log("엥 이거 완전?");
 			const fileUrl = await uploadToS3(file, loggedInUser.id, 'uploads');
 			console.log(fileUrl);
 
