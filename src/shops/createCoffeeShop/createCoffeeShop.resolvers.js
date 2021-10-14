@@ -12,6 +12,12 @@ export default {
 				if(caption){
 					categoriesObjs = processCategories(caption);
 				}			
+				
+				if(!file){
+					console.log("file is empty")
+				}else{
+					console.log("file is here")
+				}
 
 				// file Url 가져옴			
 				const fileUrl = await uploadToS3(file, loggedInUser.id, 'uploads');			
