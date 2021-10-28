@@ -8,3 +8,6 @@ toekninfo.txt
 
 # build파일
 build
+
+# only nomad dev
+README.md
