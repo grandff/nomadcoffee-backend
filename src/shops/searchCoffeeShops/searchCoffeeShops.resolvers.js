@@ -28,11 +28,15 @@ export default {
 				]
 			},
 			select : {
+				id : true,
+				userId : true,
 				name : true,
 				caption : true,
 				photos : true,
 				user : true,
-				categories : true
+				categories : true,
+				createdAt : true,
+				updatedAt : true
 			}
 		})
 	}
